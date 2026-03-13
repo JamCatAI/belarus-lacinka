@@ -154,8 +154,7 @@ def to_lacinka(text: str) -> str:
 
         # ── Non-Cyrillic: pass through ────────────────────────────────────────
         result.append(ch)
-        if ch.isspace() or not ch.isalpha():
-            prev_type = 'start'
+        prev_type = 'start'  # any non-Cyrillic char breaks context (Latin, digits, punctuation, URLs)
         i += 1
 
     return ''.join(result)

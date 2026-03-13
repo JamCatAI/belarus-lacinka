@@ -82,10 +82,16 @@ test('дзякуй',   'dźakuj',  'дзякуй (thank you)')
 test('добры',    'dobry',   'добры (good)')
 test('вечар',    'viečar',  'вечар (evening) — в hard → v, е→ie, ч→č')
 
-print("\n── Passthrough ──")
-test('hello',    'hello',   'Latin passthrough')
-test('2024',     '2024',    'digits passthrough')
-test('мова, свет!', 'mova, sviet!', 'punctuation preserved — с before в stays hard')
+print("\n── Passthrough & mixed text ──")
+test('hello',            'hello',                    'Latin passthrough')
+test('2024',             '2024',                     'digits passthrough')
+test('мова, свет!',      'mova, sviet!',             'punctuation preserved')
+test('https://example.com', 'https://example.com',   'URL passthrough')
+test('мова (language)',  'mova (language)',           'Cyrillic + Latin in parens')
+test('зь яна',           'ź jana',                   'space resets context — яна after space → ja')
+test('наведайце www.example.com', 'naviedajće www.example.com', 'Cyrillic word + URL')
+# Latin alpha after Cyrillic consonant should not bleed state
+test('лeс',              'łes',                      'Latin e after Cyrillic л — л→ł, Latin e passthrough')
 
 if __name__ == '__main__':
     pass
